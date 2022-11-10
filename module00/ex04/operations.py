@@ -17,8 +17,12 @@ if __name__=='__main__':
                 print("Remainder:  ", "ERROR (modulo by zero)");
         except ValueError as ve:
             print("Error: only integers");
-    elif argc > 3:
-        print("Error: too many arguments");
+            print("Usage: python3 operations.py <number1> <number2>");
+            print("Example: \n\tpython3 operations.py 10 3")
     else:
+        if argc > 3:
+            print("Error: too many arguments");
+        else:
+            print("Error: too few arguments");
         print("Usage: python3 operations.py <number1> <number2>");
         print("Example: \n\tpython3 operations.py 10 3")
