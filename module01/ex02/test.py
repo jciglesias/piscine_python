@@ -22,39 +22,40 @@ if __name__=="__main__":
         # (4,1)
         print(v1.T())
         # Expected output:
-        # Vector([[0.0, 1.0, 2.0, 3.0]])
+        # [[0.0, 1.0, 2.0, 3.0]]
         print(v1.shape)
         # Expected output:
         # (1,4)
         print("Example 2:");
-        v2 = Vector([[0.0, 1.0, 2.0, 3.0]])
-        print(v2.shape)
+        print(v1.shape)
         # Expected output:
         # (1,4)
-        print(v2.T())
+        print(v1.T())
         # Expected output:
         # Vector([[0.0], [1.0], [2.0], [3.0]])
-        print(v2.shape)
+        print(v1.shape)
         # Expected output:
         # (4,1)
         print("Example 3:");
-        v3 = Vector([[0.0], [1.0], [2.0], [3.0]])
-        v4 = Vector([[2.0], [1.5], [2.25], [4.0]])
-        print(v3.dot(v4))
+        v2 = Vector([[2.0], [1.5], [2.25], [4.0]])
+        print(v1.dot(v2))
         # Expected output:
         # 18.0
-        v5 = Vector([[1.0, 3.0]])
-        v6 = Vector([[2.0, 4.0]])
-        print(v5.dot(v6))
+        v3 = Vector([[1.0, 3.0]])
+        v4 = Vector([[2.0, 4.0]])
+        print(v3.dot(v4))
         # Expected output:
         # 14.0
-        print(v3)
+        print(v1)
         # Expected output: to see what __repr__() should do
         # [[0.0, 1.0, 2.0, 3.0]]
-        print(v3.values)
+        print(v1.values)
         # Expected output: to see what __str__() should do
         # [[0.0, 1.0, 2.0, 3.0]]
         print("Example 4:")
-        print(v5 + v6);
+        print(v1 + v2);
+        print(v1 - v2);
+        print(v1 * 10);
+        print(10 / v2);
     except Exception as e:
         print(e);
