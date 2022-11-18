@@ -1,6 +1,8 @@
 def what_are_the_vars(*args, **kwargs):
     """
-    ...
+    Create an object with attributes passed as arguments
+    if the name of the attribute does not repeat
+    in wich case return None
     """
     ob = ObjectC()
     for i in range(len(args)):
