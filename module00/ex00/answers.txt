@@ -13,4 +13,4 @@ pip uninstall numpy
 pip install --force-reinstall numpy
 
 * Freeze your python packages and their versions in a requirements.txt file you have to turn-in.
-./requirements.txt
+pip freeze > ./requirements.txt
