@@ -1,7 +1,6 @@
 """
 Process images
 """
-# %matplotlib inline
 import matplotlib.image as img
 import matplotlib.pyplot as plt
 
