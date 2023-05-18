@@ -4,5 +4,5 @@ kata = "The right format"
 
 if __name__=="__main__":
     for i in range(42 - len(kata)):
-        print('-', end = "");
-    print(kata, end = "");
+        print('-', end = "")
+    print(kata, end = "")

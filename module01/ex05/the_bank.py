@@ -12,7 +12,7 @@ class Account(object):
         if not isinstance(self.name, str):
             raise AttributeError("Attribute name must be a str object.")
     def transfer(self, amount):
-        self.value += amount;
+        self.value += amount
 
 class Bank(object):
     """The bank"""
@@ -37,100 +37,100 @@ class Bank(object):
         @amount: float(amount) amount to transfer
         @return True if success, False if an error occured
         """
-        origin_acc: Account = None;
-        dest_acc: Account = None;
+        origin_acc: Account = None
+        dest_acc: Account = None
         for i in self.accounts:
             if i.name == origin:
-                origin_acc = i;
+                origin_acc = i
             elif i.name == dest:
-                dest_acc: Account = i;
+                dest_acc: Account = i
         if origin == dest:
             if isvalidacc(origin_acc):
-                return True;
+                return True
             else:
-                return False;
+                return False
         if isvalidacc(origin_acc) and isvalidacc(dest_acc) and amount > 0 and origin_acc.value >= amount:
             if origin_acc is not dest_acc:
-                dest_acc.transfer(amount);
-                origin_acc.value -= amount;
-            return True;
-        return False;
+                dest_acc.transfer(amount)
+                origin_acc.value -= amount
+            return True
+        return False
     def fix_account(self, name):
         """ fix account associated to name if corrupted
         @name: str(name) of the account
         @return True if success, False if an error occured
         """
         if not isinstance(name, str):
-            return False;
-        account: Account = None;
+            return False
+        account: Account = None
         for i in self.accounts:
             if i.name == name:
-                account = i;
+                account = i
         if not account:
-            return False;
-        attr = account.__dict__;
+            return False
+        attr = account.__dict__
         while not isvalidacc(account):
             if not len(attr) % 2:
-                ind = None;
+                ind = None
                 for i in attr:
                     if i != "name" and i != "value" and i != "id" and i.find("zip") and i.find("addr"):
-                        ind = i;
-                attr.pop(ind);
-            z, addr = 0, 0;
+                        ind = i
+                attr.pop(ind)
+            z, addr = 0, 0
             if not attr.get("name") or not isinstance(attr["name"], str):
-                attr["name"] = name;
+                attr["name"] = name
             if not attr.get("id") or not isinstance(attr["id"], int):
-                attr["id"] = Account.ID_COUNT;
-                Account.ID_COUNT += 1;
+                attr["id"] = Account.ID_COUNT
+                Account.ID_COUNT += 1
             if not attr.get("value") or not isinstance(attr["value"], (int, float)):
-                attr["value"] = 0.0;
+                attr["value"] = 0.0
             for i in attr:
                 if i[0] == 'b':
-                    i.lstrip("b");
+                    i.lstrip("b")
                 elif i.find("zip") == 0:
-                    z += 1;
+                    z += 1
                 elif i.find("addr") == 0:
-                    addr += 1;
+                    addr += 1
             if z == 0 and addr == 0:
-                attr["zip"] = input("Enter zip addres:\n");
-        return True;
+                attr["zip"] = input("Enter zip addres:\n")
+        return True
 
 def isvalidacc(account = None):
     if not isinstance(account, Account):
-        # print("instance is not account");
-        return False;
-    attr = account.__dict__;
+        # print("instance is not account")
+        return False
+    attr = account.__dict__
     if not len(attr) % 2:
         # print("even number of attributes")
-        return False;
-    z, addr = 0, 0;
+        return False
+    z, addr = 0, 0
     if  not attr.get("id"):
-        # print("missing id");
-        return False;
+        # print("missing id")
+        return False
     if not isinstance(attr.get("value"), (int, float)):
-        # print("missing value");
-        return False;
+        # print("missing value")
+        return False
     if not attr.get("name"):
-        # print("missing name");
-        return False;
+        # print("missing name")
+        return False
     for i in attr:
         if i[0] == 'b':
             # print(i, attr[i])
             return False
         elif i.find("zip") == 0:
-            z += 1;
+            z += 1
         elif i.find("addr") == 0:
-            addr += 1;
+            addr += 1
         elif i == "name" and not isinstance(attr[i], str):
             # print(i, attr[i])
-            return False;
+            return False
         elif i == "id" and not isinstance(attr[i], int):
             # print(i, attr[i])
-            return False;
+            return False
         elif i == "value" and not isinstance(attr[i], (int, float)):
             # print(i, attr[i])
-            return False;
+            return False
     if z == 0 and addr == 0:
         # print("no zip or addr")
-        return False;
-    return True;
+        return False
+    return True

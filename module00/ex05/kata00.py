@@ -3,7 +3,7 @@ kata = (19, 42, 21)
 # kata = ()
 
 if __name__=='__main__':
-    size = len(kata);
-    print(f"The {size} numbers are:", end = " " if size else '\n');
+    size = len(kata)
+    print(f"The {size} numbers are:", end = " " if size else '\n')
     for i in range(size):
-        print(kata[i], end = "\n" if i == (size - 1) else ", ");
+        print(kata[i], end = "\n" if i == (size - 1) else ", ")

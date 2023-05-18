@@ -4,25 +4,25 @@ MORSE_DICT = { 'A':'.-', 'B':'-...', 'C':'-.-.', 'D':'-..', 'E':'.', 'F':'..-.',
 
 def translate_code(line:str = None):
     if line != None:
-        l = "";
+        l = ""
         for n in line:
-            code = MORSE_DICT.get(n.capitalize());
+            code = MORSE_DICT.get(n.capitalize())
             if code == None:
-                raise ValueError(f"ERROR: {n} is not convertible to morse code");
-            l += code;
-        print(l);
+                raise ValueError(f"ERROR: {n} is not convertible to morse code")
+            l += code
+        print(l)
 
 if __name__=="__main__":
-    argc = len(sys.argv);
+    argc = len(sys.argv)
     if argc > 1:
-        st = sys.argv[1];
+        st = sys.argv[1]
         if argc > 2:
             for i in sys.argv:
                 if i != 'sos.py' and i != sys.argv[1]:
-                    st += (' ' + i);
+                    st += (' ' + i)
         try:
-            translate_code(st);
+            translate_code(st)
         except ValueError as ve:
-            print(ve);
+            print(ve)
     else:
-        print("Usage: python3 sos.py <arg> ...");
+        print("Usage: python3 sos.py <arg> ...")

@@ -9,9 +9,9 @@ if __name__ == "__main__":
     machine.make_coffee()
     machine.add_water(70)
     tmp = range(100, 200)
-    ret = 0;
+    ret = 0
     for i in my_minipack.loading.ft_progress(tmp):
-        ret += (i + 3) % 5;
-        time.sleep(0.01);
-    print();
-    print(ret);
+        ret += (i + 3) % 5
+        time.sleep(0.01)
+    print()
+    print(ret)

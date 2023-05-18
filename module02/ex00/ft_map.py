@@ -9,6 +9,6 @@ def ft_map(function_to_apply, iterable):
     """
     try:
         for x in iterable:
-            yield function_to_apply(x);
+            yield function_to_apply(x)
     except Exception as e:
-        return None;
+        return None

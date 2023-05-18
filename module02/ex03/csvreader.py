@@ -37,9 +37,9 @@ class CsvReader():
                 for x in tmp:
                     if x == "":
                         return None
-                self.data.append(tmp);
+                self.data.append(tmp)
             i += 1
-            line = buff.readline();
+            line = buff.readline()
         return self
     def __exit__(self, exc_type, exc_value, exc_traceback):
         try:

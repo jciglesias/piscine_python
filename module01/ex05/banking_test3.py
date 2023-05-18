@@ -31,7 +31,7 @@ if __name__ == "__main__":
                             addr='France',
                             value=42))
     
-    for i in accounts: bank.add(i);
+    for i in accounts: bank.add(i)
 
     for i in accounts:
         if bank.transfer('James Watson', i.name, 1000.0) is False:
