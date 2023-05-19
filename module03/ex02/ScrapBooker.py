@@ -24,7 +24,7 @@ class ScrapBooker:
         Raise:
             This function should not raise any Exception.
         """
-        if isinstance(array, np.ndarray) and isinstance(dim, tuple) and isinstance(position, tuple):
+        if isinstance(array, np.ndarray) and isinstance(dim, tuple) and len(dim) == 2 and isinstance(position, tuple) and len(position) == 2:
             newarray = []
             count_rows = 0
             count_colums = 0
@@ -72,7 +72,7 @@ class ScrapBooker:
                     if axis or (not axis and (j + 1) % _n):
                         newarray[count_rows - 1].append(array[i][j])
             return(np.array(newarray))
-    def juxtapose(self, array: np.ndarray, _n, axis):
+    def juxtapose(self, array: np.ndarray, _n: int, axis: int):
         """
         Juxtaposes n copies of the image along the specified axis.
         Args:
@@ -110,13 +110,15 @@ class ScrapBooker:
         Raises:
             This function should not raise any Exception.
         """
-        if isinstance(array, np.ndarray) and isinstance(dim, tuple):
+        if isinstance(array, np.ndarray) and isinstance(dim, tuple) and len(dim) == 2:
             newarray = []
+            pos = 0
             for x in range(dim[0]) :
                 for i in range(array.shape[0]) :
                     newarray.append([])
                     for y in range(dim[1]):
                         for j in array[i]:
-                            newarray[i].append(j)
+                            newarray[pos].append(j)
+                    pos += 1
             return np.array(newarray)
         return None
