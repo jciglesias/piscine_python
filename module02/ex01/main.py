@@ -22,12 +22,8 @@ class ObjectC(object):
 def doom_printer(obj):
     if obj is None:
         print("ERROR")
-        print("end")
-        return
-    for attr in dir(obj):
-        if attr[0] != '_':
-            value = getattr(obj, attr)
-            print("{}:\t{}".format(attr, value))
+    else:
+        [print(f"{attr}:\t{getattr(obj, attr)}") for attr in dir(obj) if attr[0] != '_']
     print("end")
 
 if __name__ == "__main__":
