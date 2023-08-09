@@ -10,5 +10,4 @@ def ft_map(function_to_apply, iterable):
     try:
         yield from [function_to_apply(x) for x in iterable]
     except Exception as e:
-        print(e)
-        return None
+        raise e

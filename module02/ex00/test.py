@@ -27,11 +27,3 @@ print("\nExample3\nft:  ", ft_reduce(lambda u, v: u + v, lst))
 print("std: ", reduce(lambda u, v: u + v, lst))
 # Output:
 # "Hello world"
-
-function = lambda x: x + 1
-iterable = [1, 2, 3]
-print(ft_map(function_to_apply = None, iterable = iterable))
-#  Should print "< generator object at hexa_adress>" 
-print(list(ft_map(function_to_apply = None, iterable = iterable)))
-
-# Error

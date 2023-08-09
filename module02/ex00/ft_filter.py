@@ -8,9 +8,6 @@ def ft_filter(function_to_apply, iterable):
     None if the iterable can not be used by the function.
     """
     try:
-        for x in iterable:
-            if function_to_apply(x):
-                yield x
-        pass
+        yield from [x for x in iterable if function_to_apply(x)]
     except Exception as e:
-        return None
+        raise e
