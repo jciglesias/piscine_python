@@ -24,7 +24,7 @@ class ScrapBooker:
         Raise:
             This function should not raise any Exception.
         """
-        if isinstance(array, np.ndarray) and isinstance(dim, tuple) and len(dim) == 2 and isinstance(position, tuple) and len(position) == 2:
+        if isinstance(array, np.ndarray) and type(dim) == tuple == type(position) and len(dim) == 2 == len(position):
             newarray = []
             count_rows = 0
             count_colums = 0
@@ -33,7 +33,7 @@ class ScrapBooker:
                     count_rows += 1
                     newarray.append([])
                 for j in range(array.shape[1]):
-                    if i >= position[0] and j >= position[1] and count_rows < (dim[0] + 1) and count_colums < dim[1]:
+                    if i >= position[0] and j >= position[1] and count_rows <= dim[0] and count_colums < dim[1]:
                         newarray[count_rows - 1].append(array[i][j])
                         count_colums += 1
                 count_colums = 0
