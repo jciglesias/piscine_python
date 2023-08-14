@@ -41,3 +41,4 @@ print(ft_reduce((lambda x, y: x + y), [1]))
 # you should get 1.
 print(ft_reduce((lambda x, y: x * y), [1, 2, 3, 4]))
 # you should get 24.
+# print(reduce((lambda x, y: x * y), [1, 2, 3, 4]))
