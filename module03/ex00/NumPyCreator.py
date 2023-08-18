@@ -24,29 +24,21 @@ class NumPyCreator:
         takes a list or nested lists and returns its corresponding
         Numpy array.
         """
-        if validate(lst, list):
-            return numpy.array(lst, dtype=dtype)
-        return None
+        return numpy.array(lst, dtype=dtype) if validate(lst, list) else None
     def from_tuple(self, tpl, dtype = None):
         """
         takes a tuple or nested tuples and returns its corresponding
         Numpy array.
         """
-        if validate(tpl, tuple):
-            return numpy.array(tpl, dtype=dtype)
-        return None
+        return numpy.array(tpl, dtype=dtype) if validate(tpl, tuple) else None
     def from_iterable(self, itr, dtype = None):
         """
         takes an iterable and returns an array which contains all
         its elements.
         """
         try:
-            tmp = []
-            for i in itr:
-                tmp.append(i)
-            if validate(tmp, list):
-                return numpy.array(tmp, dtype=dtype)
-            return None
+            tmp = [i for i in itr]
+            return numpy.array(tmp, dtype=dtype) if validate(tmp, list) else None
         except TypeError:
             return None
     def from_shape(self, shape, value = 0, dtype = None):
