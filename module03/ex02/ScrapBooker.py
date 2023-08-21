@@ -60,17 +60,11 @@ class ScrapBooker:
             if _n < 0 or axis < 0 or axis > 1 or _n > array.shape[~axis]:
                 print(array.shape)
                 return None
-            count_rows = 0
             newarray = []
             for i in range(array.shape[0]):
                 if not axis or (axis and (i + 1) % _n):
                     newarray.append([])
-                    count_rows += 1
-                else :
-                    continue
-                for j in range(array.shape[1]):
-                    if axis or (not axis and (j + 1) % _n):
-                        newarray[count_rows - 1].append(array[i][j])
+                    [newarray[newarray.__len__() - 1].append(array[i][j]) for j in range(array.shape[1]) if axis or (not axis and (j + 1) % _n)]
             return(np.array(newarray))
     def juxtapose(self, array: np.ndarray, _n: int, axis: int):
         """
