@@ -27,7 +27,13 @@ class ColorFilter:
             This function should not raise any Exception.
         """
         if isinstance(array, np.ndarray):
-            return 1 - array 
+            arr = array.copy()
+            for row in arr:
+                for column in row:
+                    column[0] = 1 - column[0]
+                    column[1] = 1 - column[1]
+                    column[2] = 1 - column[2]
+            return arr
         return None
 
     def to_blue(self, array):
@@ -137,11 +143,9 @@ class ColorFilter:
                         b, a, c = tmp[0], tmp[1], tmp[2]
                     elif c >= b >= a:
                         c, b, a = tmp[0], tmp[1], tmp[2]
-                    elif a >= c >= b:
+                    else:
                         a, c, b = tmp[0], tmp[1], tmp[2]
                     column[0], column[1], column[2] = a, b, c
-                    # if np.sum(column) < 1.0:
-                    #     column *= 0.5
             return arr
         return None
 
