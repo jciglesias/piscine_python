@@ -48,8 +48,8 @@ class ColorFilter:
             arr = array.copy()
             for row in arr:
                 for column in row:
-                    column[0] *= 0.5
-                    column[1] *= 0.5
+                    column[0] = 0
+                    column[1] = 0
                     # column[2]
             return arr
         return None
@@ -72,9 +72,9 @@ class ColorFilter:
             arr = array.copy()
             for row in arr:
                 for column in row:
-                    column[0] *= 0.5
+                    column[0] *= 0.1
                     # column[1]
-                    column[2] *= 0.5
+                    column[2] *= 0.1
             return arr
         return None
 
@@ -97,8 +97,8 @@ class ColorFilter:
             for row in arr:
                 for column in row:
                     # column[0]
-                    column[1] *= 0.5
-                    column[2] *= 0.5
+                    column[1] = 0
+                    column[2] = 0
             return arr
         return None
 
@@ -125,8 +125,23 @@ class ColorFilter:
             arr = array.copy()
             for row in arr:
                 for column in row:
-                    if np.sum(column) < 1.0:
-                        column *= 0.5
+                    tmp = np.linspace(column.min(), column.max(), 3)
+                    a, b, c = column[0], column[1], column[2]
+                    if a >= b >= c:
+                        a, b, c = tmp[0], tmp[1], tmp[2]
+                    elif b >= c >= a:
+                        b, c, a = tmp[0], tmp[1], tmp[2]
+                    elif c >= a >= b:
+                        c, a, b = tmp[0], tmp[1], tmp[2]
+                    elif b >= a >= c:
+                        b, a, c = tmp[0], tmp[1], tmp[2]
+                    elif c >= b >= a:
+                        c, b, a = tmp[0], tmp[1], tmp[2]
+                    elif a >= c >= b:
+                        a, c, b = tmp[0], tmp[1], tmp[2]
+                    column[0], column[1], column[2] = a, b, c
+                    # if np.sum(column) < 1.0:
+                    #     column *= 0.5
             return arr
         return None
 
@@ -154,10 +169,10 @@ class ColorFilter:
             for row in arr:
                 for column in row:
                     if filter in ['m', 'mean']:
-                        tmp = np.sum(column)
-                        column[0] = tmp / 3
-                        column[1] = tmp / 3
-                        column[2] = tmp / 3
+                        tmp = np.sum(column) / 3
+                        column[0] = tmp
+                        column[1] = tmp
+                        column[2] = tmp
                     else:
                         column[0] *= kwargs[filter][0]
                         column[1] *= kwargs[filter][1]
