@@ -132,20 +132,8 @@ class ColorFilter:
             for row in arr:
                 for column in row:
                     tmp = np.linspace(column.min(), column.max(), 3)
-                    a, b, c = column[0], column[1], column[2]
-                    if a >= b >= c:
-                        a, b, c = tmp[0], tmp[1], tmp[2]
-                    elif b >= c >= a:
-                        b, c, a = tmp[0], tmp[1], tmp[2]
-                    elif c >= a >= b:
-                        c, a, b = tmp[0], tmp[1], tmp[2]
-                    elif b >= a >= c:
-                        b, a, c = tmp[0], tmp[1], tmp[2]
-                    elif c >= b >= a:
-                        c, b, a = tmp[0], tmp[1], tmp[2]
-                    else:
-                        a, c, b = tmp[0], tmp[1], tmp[2]
-                    column[0], column[1], column[2] = a, b, c
+                    for i in range(3):
+                        arr[i] = tmp[i]
             return arr
         return None
 

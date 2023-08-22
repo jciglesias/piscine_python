@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 from ColorFilter import ColorFilter
 cf = ColorFilter()
 
-arr = plt.imread("assets/42AI.png")
+arr = plt.imread("assets/elon_canaGAN.png")
 plt.title("Original")
 plt.imshow(arr)
 plt.show()
