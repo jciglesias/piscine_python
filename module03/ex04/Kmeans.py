@@ -43,7 +43,6 @@ class KmeansClustering:
                 new_centroids = np.array([data[labels == k].mean(axis=0) for k in range(self.ncentroid)])
 
                 # Check for convergence
-                print(i)
                 if np.all(self.centroids == new_centroids):
                     break
                 
@@ -82,25 +81,19 @@ if __name__=="__main__":
                 data = np.array([[float(x) for x in row[1:]] for row in reader])
             kmeans.fit(data)
             labels = kmeans.predict(data)
-            Venus = []
-            Earth = []
-            Mars = []
-            Belt = []
+            planets = {}
+            planets["labels"] = [x for x in range(int(arg["ncentroid"]))]
+            for i in planets["labels"]:
+                planets[i] = []
             for i in range(len(data)):
-                if labels[i] == 0:
-                    Venus.append(data[i])
-                elif labels[i] == 1:
-                    Earth.append(data[i])
-                elif labels[i] == 2:
-                    Mars.append(data[i])
-                elif labels[i] == 3:
-                    Belt.append(data[i])
+                planets[labels[i]].append(list(data[i]))
+            for x in planets["labels"]:
+                planets[x] = [[a[0] for a in planets[x]], [a[1] for a in planets[x]], [a[2] for a in planets[x]]]
             fig = plt.figure()
             ax = fig.add_subplot(projection='3d')
-            ax.scatter([x[0] for x in Venus], [x[1] for x in Venus], [x[2] for x in Venus])
-            ax.scatter([x[0] for x in Earth], [x[1] for x in Earth], [x[2] for x in Earth], color="g")
-            ax.scatter([x[0] for x in Mars], [x[1] for x in Mars], [x[2] for x in Mars], color="r")
-            ax.scatter([x[0] for x in Belt], [x[1] for x in Belt], [x[2] for x in Belt], color="black")
+            planets["color"] = ["b", "g", "r", "black"]
+            for a in planets["labels"]:
+                ax.scatter(planets[a][0], planets[a][1], planets[a][2], color=f'{planets["color"][a]}')
             plt.show()
         except Exception as e:
             print(e)
