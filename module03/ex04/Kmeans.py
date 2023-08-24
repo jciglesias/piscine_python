@@ -68,6 +68,8 @@ class KmeansClustering:
             return(np.argmin(distances, axis=1))
         return None
 
+from matplotlib import pyplot as plt
+
 if __name__=="__main__":
     if len(sys.argv[1:]) == 3:
         arg = [splt.split("=") for splt in sys.argv[1:]]
@@ -79,7 +81,27 @@ if __name__=="__main__":
                 next(reader)
                 data = np.array([[float(x) for x in row[1:]] for row in reader])
             kmeans.fit(data)
-            print(kmeans.predict(data))
+            labels = kmeans.predict(data)
+            Venus = []
+            Earth = []
+            Mars = []
+            Belt = []
+            for i in range(len(data)):
+                if labels[i] == 0:
+                    Venus.append(data[i])
+                elif labels[i] == 1:
+                    Earth.append(data[i])
+                elif labels[i] == 2:
+                    Mars.append(data[i])
+                elif labels[i] == 3:
+                    Belt.append(data[i])
+            fig = plt.figure()
+            ax = fig.add_subplot(projection='3d')
+            ax.scatter([x[0] for x in Venus], [x[1] for x in Venus], [x[2] for x in Venus])
+            ax.scatter([x[0] for x in Earth], [x[1] for x in Earth], [x[2] for x in Earth], color="g")
+            ax.scatter([x[0] for x in Mars], [x[1] for x in Mars], [x[2] for x in Mars], color="r")
+            ax.scatter([x[0] for x in Belt], [x[1] for x in Belt], [x[2] for x in Belt], color="black")
+            plt.show()
         except Exception as e:
             print(e)
     else:
