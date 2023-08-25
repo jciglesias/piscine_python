@@ -1,5 +1,6 @@
 import sys, csv
 import numpy as np
+from matplotlib import pyplot as plt
 
 class KmeansClustering:
     def __init__(self, max_iter=20, ncentroid=5):
@@ -67,7 +68,50 @@ class KmeansClustering:
             return(np.argmin(distances, axis=1))
         return None
 
-from matplotlib import pyplot as plt
+def average(lst):
+    return sum(lst) / len(lst)
+
+def find_biggest(lst, mesure):
+    tmp = [x[1][mesure] for x in lst]
+    a = 0
+    for i in range(len(tmp)):
+        if tmp[i] > a and lst[i][0] == "":
+            a = i
+    return a
+
+def setAreas(planets):
+    tmp = []
+    for a in planets["labels"]:
+        tmp.append(("", {"height":average(planets[a][0]), "weight":average(planets[a][1]), "bone":average(planets[a][2])}))
+    tmp[find_biggest(tmp, "height")][0] = "Asteroids Belt colonies"
+    print("debug")
+    tmp[find_biggest(tmp, "height")][0] = "Mars Republic"
+    tmp[find_biggest(tmp, "weight")][0] = "United Nations of Earth"
+    return [ x[0] for x in tmp]
+
+
+
+def plotting(ncentroid, data):
+    planets = {}
+    planets["labels"] = [x for x in range(ncentroid)]
+    for i in planets["labels"]:
+        planets[i] = []
+    for i in range(len(data)):
+        planets[labels[i]].append(list(data[i]))
+    for x in planets["labels"]:
+        planets[x] = [[a[0] for a in planets[x]], [a[1] for a in planets[x]], [a[2] for a in planets[x]]]
+    fig = plt.figure()
+    ax: plt.Axes = fig.add_subplot(projection='3d')
+    planets["color"] = ["b", "g", "r", "black", "white", "pink", "purple"]
+    for a in planets["labels"]:
+        ax.scatter(planets[a][0], planets[a][1], planets[a][2], color=f'{planets["color"][a]}', label=f"Area {a}")
+    ax.set_xlabel('Height')
+    ax.set_ylabel('Weight')
+    ax.set_zlabel('Bone density')
+    if ncentroid == 4:
+        planets["labels"] = setAreas(planets)
+    ax.legend(planets["labels"])
+    plt.show()
 
 if __name__=="__main__":
     if len(sys.argv[1:]) == 3:
@@ -81,20 +125,7 @@ if __name__=="__main__":
                 data = np.array([[float(x) for x in row[1:]] for row in reader])
             kmeans.fit(data)
             labels = kmeans.predict(data)
-            planets = {}
-            planets["labels"] = [x for x in range(int(arg["ncentroid"]))]
-            for i in planets["labels"]:
-                planets[i] = []
-            for i in range(len(data)):
-                planets[labels[i]].append(list(data[i]))
-            for x in planets["labels"]:
-                planets[x] = [[a[0] for a in planets[x]], [a[1] for a in planets[x]], [a[2] for a in planets[x]]]
-            fig = plt.figure()
-            ax = fig.add_subplot(projection='3d')
-            planets["color"] = ["b", "g", "r", "black"]
-            for a in planets["labels"]:
-                ax.scatter(planets[a][0], planets[a][1], planets[a][2], color=f'{planets["color"][a]}')
-            plt.show()
+            plotting(int(arg["ncentroid"]), data)
         except Exception as e:
             print(e)
     else:
