@@ -84,14 +84,13 @@ def setAreas(planets):
     for a in planets["labels"]:
         tmp.append(["", {"height":average(planets[a][0]), "weight":average(planets[a][1]), "bone":average(planets[a][2])}])
     tmp[find_biggest(tmp, "height")][0] = "Asteroids Belt colonies"
-    print("debug")
     tmp[find_biggest(tmp, "height")][0] = "Mars Republic"
     tmp[find_biggest(tmp, "weight")][0] = "United Nations of Earth"
     return [x[0] if x[0] != "" else "The flying cities of Venus" for x in tmp]
 
 
 
-def plotting(ncentroid, data):
+def plotting(ncentroid, data, labels):
     planets = {}
     planets["labels"] = [x for x in range(ncentroid)]
     for i in planets["labels"]:
@@ -111,6 +110,8 @@ def plotting(ncentroid, data):
     if ncentroid == 4:
         planets["labels"] = setAreas(planets)
     ax.legend(planets["labels"])
+    for x in planets["labels"]:
+        print(f"{len([data[i] for i in range(len(data)) if labels[i] == planets['labels'].index(x)])} Habitants in {x}")
     plt.show()
 
 if __name__=="__main__":
@@ -125,7 +126,7 @@ if __name__=="__main__":
                 data = np.array([[float(x) for x in row[1:]] for row in reader])
             kmeans.fit(data)
             labels = kmeans.predict(data)
-            plotting(int(arg["ncentroid"]), data)
+            plotting(int(arg["ncentroid"]), data, labels)
         except Exception as e:
             print(e)
     else:
