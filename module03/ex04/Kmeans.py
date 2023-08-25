@@ -82,12 +82,12 @@ def find_biggest(lst, mesure):
 def setAreas(planets):
     tmp = []
     for a in planets["labels"]:
-        tmp.append(("", {"height":average(planets[a][0]), "weight":average(planets[a][1]), "bone":average(planets[a][2])}))
+        tmp.append(["", {"height":average(planets[a][0]), "weight":average(planets[a][1]), "bone":average(planets[a][2])}])
     tmp[find_biggest(tmp, "height")][0] = "Asteroids Belt colonies"
     print("debug")
     tmp[find_biggest(tmp, "height")][0] = "Mars Republic"
     tmp[find_biggest(tmp, "weight")][0] = "United Nations of Earth"
-    return [ x[0] for x in tmp]
+    return [x[0] if x[0] != "" else "The flying cities of Venus" for x in tmp]
 
 
 
