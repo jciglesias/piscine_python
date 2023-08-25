@@ -1,22 +1,26 @@
 from FileLoader import FileLoader
 
 loader = FileLoader()
-data = loader.load("../data/adult_data.csv")
+data = loader.load("data/athlete_events.csv")
 # Output
-# Loading dataset of dimensions 32561 x 15
-loader.display(data, 12)
+# (271116, 15) 
+print("Example 1:")
+loader.display(data, 3)
 # Output
-# age workclass fnlwgt ... hours-per-week native-country salary
-# 0 39 State-gov 77516 ... 40 United-States <=50K
-# 1 50 Self-emp-not-inc 83311 ... 13 United-States <=50K
-# 2 38 Private 215646 ... 40 United-States <=50K
-# 3 53 Private 234721 ... 40 United-States <=50K
-# 4 28 Private 338409 ... 40 Cuba <=50K
-# 5 37 Private 284582 ... 40 United-States <=50K
-# 6 49 Private 160187 ... 16 Jamaica <=50K
-# 7 52 Self-emp-not-inc 209642 ... 45 United-States >50K
-# 8 31 Private 45781 ... 50 United-States >50K
-# 9 42 Private 159449 ... 40 United-States >50K
-# 10 37 Private 280464 ... 80 United-States >50K
-# 11 30 State-gov 141297 ... 40 India >50K
-# [12 rows x 15 columns]
+#    ID                 Name Sex   Age  Height  Weight     Team  NOC        Games  Year  Season       City       Sport                         Event Medal
+# 0   1            A Dijiang   M  24.0   180.0    80.0    China  CHN  1992 Summer  1992  Summer  Barcelona  Basketball   Basketball Men's Basketball   NaN
+# 1   2             A Lamusi   M  23.0   170.0    60.0    China  CHN  2012 Summer  2012  Summer     London        Judo  Judo Men's Extra-Lightweight   NaN
+# 2   3  Gunnar Nielsen Aaby   M  24.0     NaN     NaN  Denmark  DEN  1920 Summer  1920  Summer  Antwerpen    Football       Football Men's Football   NaN
+print("Example 2:")
+loader.display(data, -3)
+# Output
+# ID                Name Sex   Age  Height  Weight    Team  NOC        Games  Year  Season            City        Sport                               Event Medal
+# 271113  135570            Piotr ya   M  27.0   176.0    59.0  Poland  POL  2014 Winter  2014  Winter           Sochi  Ski Jumping  Ski Jumping Men's Large Hill, Team   NaN
+# 271114  135571  Tomasz Ireneusz ya   M  30.0   185.0    96.0  Poland  POL  1998 Winter  1998  Winter          Nagano    Bobsleigh                Bobsleigh Men's Four   NaN
+# 271115  135571  Tomasz Ireneusz ya   M  34.0   185.0    96.0  Poland  POL  2002 Winter  2002  Winter  Salt Lake City    Bobsleigh                Bobsleigh Men's Four   NaN
+print("Example 3:")
+loader.display(data, -3)
+# should display Nothing or the Header (column names of the dataframe)
+print("Example 4:")
+loader.display(data, "lol")
+#shouldnt crash
