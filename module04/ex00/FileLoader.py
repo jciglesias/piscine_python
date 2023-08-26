@@ -19,11 +19,9 @@ class FileLoader:
         """
         try:
             if n >= 0:
-                for i in range(n):
-                    print(df.loc[[i]])
+                print(df.loc[[i for i in range(n)]])
             else:
-                print(df.loc.__sizeof__())
-                # for i in range(n % df.size, df.size):
-                #     print(df.loc[[i]])
+                size = len(df)
+                print(df.loc[[i for i in range(size + n, size)]])
         except Exception as e:
             print(e)
