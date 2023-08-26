@@ -8,7 +8,9 @@ class FileLoader:
         returns the dataset loaded as a pandas.DataFrame.
         """
         try:
-            return pd.read_csv(path)
+            data = pd.read_csv(path)
+            print(data.shape)
+            return data
         except Exception as e:
             print(e)
     def display(self, df:pd.DataFrame, n):
