@@ -79,9 +79,14 @@ class ScrapBooker:
         Raises:
             This function should not raise any Exception.
         """
-        if not axis :
-            return np.array([y for _ in range(_n) for y in array])
-        return np.array([[i for _ in range(_n) for i in array[x]] for x in range(array.shape[0])])
+        try:
+            if isinstance(array, np.ndarray) and _n >= 0 and (axis == 0 or axis == 1):
+                if not axis :
+                    return np.array([y for _ in range(_n) for y in array])
+                return np.array([[i for _ in range(_n) for i in array[x]] for x in range(array.shape[0])])
+            return None
+        except Exception:
+            return None
     def mosaic(self, array: np.ndarray, dim: tuple):
         """
         Makes a grid with multiple copies of the array. The dim argument
