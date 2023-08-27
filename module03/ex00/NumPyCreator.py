@@ -1,6 +1,7 @@
 """Class to create NumPy arrays"""
 import random
 import numpy
+
 def validate(obj, dtype):
     """
     validate list and tuple input
@@ -57,16 +58,8 @@ class NumPyCreator:
         argument a tuple which specifies the shape of the array.
         """
         try:
-            _y, _x, tmp = 0, 0, []
-            while _y < shape[0]:
-                tmp.append([])
-                while _x < shape[1]:
-                    tmp[_y].append(random.random())
-                    _x += 1
-                _x = 0
-                _y += 1
             if len(shape) == 2 and shape[0] >= 0 and shape[1] >= 0:
-                return numpy.array(tmp, dtype = dtype)
+                return numpy.array([[random.random() for _ in range(shape[1])] for _ in range(shape[0])], dtype = dtype)
             return None
         except TypeError:
             return None
@@ -75,19 +68,8 @@ class NumPyCreator:
         returns an array representing the identity matrix of size n.
         """
         try:
-            _y, _x, tmp = 0, 0, []
-            while _y < _n:
-                tmp.append([])
-                while _x < _n:
-                    if _y == _x:
-                        tmp[_y].append(1)
-                    else:
-                        tmp[_y].append(0)
-                    _x += 1
-                _x = 0
-                _y += 1
             if _n >= 0:
-                return numpy.array(tmp, dtype = dtype)
+                return numpy.array([[1 if _y == _x else 0 for _x in range(_n)] for _y in range(_n)], dtype = dtype)
             return None
         except TypeError:
             return None
