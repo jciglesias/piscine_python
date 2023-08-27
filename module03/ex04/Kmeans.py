@@ -25,17 +25,18 @@ class KmeansClustering:
             data = X.copy()
 
             # Calculate ncentroids percentiles
-            p = 100 / (self.ncentroid + 1)
-            for i in range(1, self.ncentroid + 1):
-                self.centroids.append(list(np.percentile(data, p * i, axis=0)))
-            self.centroids = np.array(self.centroids)
+            # p = 100 / (self.ncentroid + 1)
+            # for i in range(1, self.ncentroid + 1):
+            #     self.centroids.append(list(np.percentile(data, p * i, axis=0)))
+            # self.centroids = np.array(self.centroids)
 
             # Or do it random:
-            # self.centroids = data[np.random.choice(data.shape[0], self.ncentroid, replace=False)]
+            self.centroids = data[np.random.choice(data.shape[0], self.ncentroid, replace=False)]
 
             for i in range(self.max_iter):
                 # Calculate distances between data points and centroids
-                distances = np.sqrt(((data[:, np.newaxis, :] - self.centroids) ** 2).sum(axis=2))
+                # distances = np.sqrt(((data[:, np.newaxis, :] - self.centroids) ** 2).sum(axis=2))
+                distances = np.array([[np.linalg.norm(x - y) for y in self.centroids] for x in data])
 
                 # Assign each data point to the closest centroid
                 labels = np.argmin(distances, axis=1)
