@@ -13,7 +13,9 @@ def youngest_fellah(data: pd.DataFrame, year: int) -> dict:
                     females.append(data["Age"][x])
                 elif data["Sex"][x] == "M":
                     males.append(data["Age"][x])
-        return {"f": np.array(females).min(), "m": np.array(males).min()}
+        rf = np.nan if not females else np.nanmin(females)
+        rm = np.nan if not males else np.nanmin(males)
+        return {"f": rf, "m": rm}
         
 
     except Exception as e:
