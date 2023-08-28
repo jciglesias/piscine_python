@@ -28,5 +28,5 @@ def how_many_medals_by_country(data: pd.DataFrame, country: str):
                     team[data["Year"][i]]["B"][data["Sex"][i]][data["Sport"][i]].append(data["Event"][i])
             else:
                 medals[data["Year"][i]]["B"] += 1
-        print(team_sports)
+        # print(team_sports)
     return dict(sorted(medals.items()))
