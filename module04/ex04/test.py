@@ -18,3 +18,11 @@ print(sp.when('Athina'))
 print(sp.when('Paris'))
 # Output
 # [1900, 1924]
+print(sp.where(2000))
+# output is: ['Sydney']
+
+print(sp.where(1980))
+# output is: ['Lake Placid', 'Moskva'] If a single of these locations is returned it's ok.
+
+print(sp.when('London'))
+# output is: [2012, 1948, 1908]
