@@ -1,6 +1,5 @@
 from matplotlib import pyplot as plt
 import pandas as pd
-import numpy as np
 
 class MyPlotLib:
     def histogram(data: pd.DataFrame, features: list):
@@ -23,7 +22,8 @@ class MyPlotLib:
         plots the density curve of each numerical feature in
         the list
         """
-        pass
+        # for x in features:
+        #     plt.scatter(data[x])
     def pair_plot(data: pd.DataFrame, features: list): 
         """
         Plots a matrix of subplots (also called scatter plot matrix).
