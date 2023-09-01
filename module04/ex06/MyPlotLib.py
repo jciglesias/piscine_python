@@ -1,4 +1,5 @@
 from matplotlib import pyplot as plt
+import numpy as np
 import pandas as pd
 import seaborn as sns
 
@@ -40,11 +41,7 @@ class MyPlotLib:
             ax[0][0].legend([features[0]])
             ax[0][0].grid(visible=True, which="both", axis="both")
             ax[0][1].scatter(data[features[0]], data[features[1]])
-            # ax[0][1].legend([features[0]])
-            # ax[0][1].grid(visible=True, which="both", axis="both")
             ax[1][0].scatter(data[features[1]], data[features[0]])
-            # ax[1][0].legend([features[0]])
-            # ax[1][0].grid(visible=True, which="both", axis="both")
             ax[1][1].hist(data[features[1]])
             ax[1][1].legend([features[1]])
             ax[1][1].grid(visible=True, which="both", axis="both")
@@ -53,5 +50,9 @@ class MyPlotLib:
         """
         Displays a box plot for each numerical variable in the dataset.
         """
-        pass
+        fig, ax = plt.subplots(1,len(features))
+        for x in range(len(features)):
+            ax[x].boxplot([i for i in data[features[x]] if ~np.isnan(i)])
+            ax[x].set_title(features[x])
+        plt.show()
     pass
