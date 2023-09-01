@@ -25,7 +25,7 @@ class MyPlotLib:
         the list
         """
         for x in features:
-            sns.distplot(data[x], hist=False)
+            sns.kdeplot(data[x])
         plt.legend(features)
         plt.show()
     def pair_plot(data: pd.DataFrame, features: list): 
