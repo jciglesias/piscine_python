@@ -1,5 +1,6 @@
 from matplotlib import pyplot as plt
 import pandas as pd
+import seaborn as sns
 
 class MyPlotLib:
     def histogram(data: pd.DataFrame, features: list):
@@ -22,8 +23,10 @@ class MyPlotLib:
         plots the density curve of each numerical feature in
         the list
         """
-        # for x in features:
-        #     plt.scatter(data[x])
+        for x in features:
+            sns.distplot(data[x], hist=False)
+        plt.legend(features)
+        plt.show()
     def pair_plot(data: pd.DataFrame, features: list): 
         """
         Plots a matrix of subplots (also called scatter plot matrix).
@@ -31,7 +34,21 @@ class MyPlotLib:
         against another one. The main diagonal of this matrix shows
         simple histograms.
         """
-        pass
+        if len(features) == 2:
+            fig, ax = plt.subplots(2, 2,  tight_layout=True)
+            ax[0][0].hist(data[features[0]])
+            ax[0][0].legend([features[0]])
+            ax[0][0].grid(visible=True, which="both", axis="both")
+            ax[0][1].scatter(data[features[0]], data[features[1]])
+            # ax[0][1].legend([features[0]])
+            # ax[0][1].grid(visible=True, which="both", axis="both")
+            ax[1][0].scatter(data[features[1]], data[features[0]])
+            # ax[1][0].legend([features[0]])
+            # ax[1][0].grid(visible=True, which="both", axis="both")
+            ax[1][1].hist(data[features[1]])
+            ax[1][1].legend([features[1]])
+            ax[1][1].grid(visible=True, which="both", axis="both")
+            plt.show()
     def box_plot(data: pd.DataFrame, features: list): 
         """
         Displays a box plot for each numerical variable in the dataset.
